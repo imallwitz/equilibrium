@@ -1,0 +1,131 @@
+/* 
+    header
+                */
+
+.header-box{
+    width: 680px;
+    text-align: center;
+    margin-left: 50px;
+}
+
+h1 {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.25em;
+    font-weight: light;
+}
+
+
+/* 
+    buttons 
+                */
+
+.button-box {
+    display: flex;
+    width: 680px;
+    justify-content: space-evenly;
+    margin: 25px 50px; 
+}
+
+button {
+    background-color: white;
+    border:2px solid rgba(22, 40, 92, 0.8);
+    border-radius: 5%;
+    margin-left: 20px;
+    box-shadow: 5px 5px rgba(22, 40, 92, 0.4);
+}
+
+button img {
+    opacity: 0.6;
+}
+
+button:hover img {
+    opacity: 1;
+}
+
+button:active {
+    box-shadow: 2px 2px rgba(22, 40, 92, 0.4);
+    transform: translate(3px, 3px);
+}
+
+
+/* 
+    rules 
+                */
+
+#rule-box {
+    width: 680px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px;
+}
+
+#rule-box img {
+    width: 300px;
+    height: 300px;
+}
+
+.rule {
+    text-align: center;
+    border: 3px solid rgba(22, 40, 92, 0.6);
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(22, 40, 92, 0.4);
+}
+
+.rule:active {
+    box-shadow: 2px 2px rgba(22, 40, 92, 0.4);
+    transform: translate(3px, 3px);
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+}
+
+
+
+/* 
+    grid
+             */
+
+#grid-container {
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px 80px 80px 80px 80px;
+    background-color: #2196F3;
+    border: 3px solid rgba(22, 40, 92, 0.8);
+    border-radius: 5%;
+    margin: 50px;
+    padding: 10px;
+    height: 680px;
+    width: 680px;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid rgba(22, 40, 92, 0.8);
+    border-radius: 10%;
+}
+
+.grid-item img {
+    margin: 10px;
+}
+
+.possible img {
+    opacity: 0.4;
+}
+
+.grid-item:active {
+    transform: translate(3px, 3px);
+}
+
+.removable {
+    border: 3px solid red;
+}
