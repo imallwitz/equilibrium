@@ -75,6 +75,7 @@ button:active {
     border: 3px solid rgba(22, 40, 92, 0.6);
     border-radius: 5px;
     box-shadow: 5px 5px rgba(22, 40, 92, 0.4);
+    margin: 0px;
 }
 
 .rule:active {
@@ -85,6 +86,11 @@ button:active {
 h3 {
     font-family: 'Open Sans', sans-serif;
     font-size: 1em;
+    margin: 10px;
+}
+
+.selected {
+    border: 3px solid #2196F3;
 }
 
 
