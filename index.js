@@ -1,7 +1,15 @@
 
 var rulesDisplayed = {
     animal: "",
-    id: false
+    id: false,
+    otterAdded: false,
+    otterRemoved: false,
+    urchinAdded: false,
+    urchinRemoved: false,
+    kelpAdded: false,
+    kelpRemoved: false,
+    jellyAdded: false,
+    jellyRemoved: false
 };
 
 var board = document.getElementById('grid-container');
@@ -19,15 +27,19 @@ function displayRules(elmnt) {
     if ( rulesDisplayed.id == false || rulesDisplayed.animal != creature) {
         
         document.getElementById("rule-box").innerHTML = 
-            `<div class="rule" onclick="showPossibleAdd()">
-                <h3>add one ${creature}</h3>
+            `<div class="rule" id="add-rule" onclick="showPossibleAdd()">
+                <h3>introduce one ${creature}</h3>
             </div>
-            <div class="rule" onclick="toggleRemovable()">
-                <h3>remove one ${creature}</h3>
+            <div class="rule" id="remove-rule" onclick="toggleRemovable()">
+                <h3>rehome one ${creature}</h3>
             </div>`;
 
         rulesDisplayed.id = true;
         rulesDisplayed.animal = creature;
+
+        // show the rules for this animal and not the others
+        showAddRules();
+        showRemoveRules();
 
     } else if (rulesDisplayed.animal == creature) {
 
@@ -35,6 +47,9 @@ function displayRules(elmnt) {
 
         rulesDisplayed.id = false;
         rulesDisplayed.animal = "";
+
+       // hide all rules
+
     }
 
     document.getElementById("otter").classList.remove("selected");
@@ -57,6 +72,8 @@ function gridClicked(box) {
 
         removeRules(`${rulesDisplayed.animal}`);
 
+        showRemoveRules();
+
         // adding a creature
     } else if (box.classList.contains("possible")) {
 
@@ -66,6 +83,8 @@ function gridClicked(box) {
         removePossibleAdd();
 
         addRules(`${rulesDisplayed.animal}`);
+
+        showAddRules();
     }
 
     countPop();
@@ -127,6 +146,7 @@ function addRules(c) {
         addCreatures("kelp", 2);
         addCreatures("jelly", 2);
 
+        rulesDisplayed.otterAdded = true;
 
         // add 1 urchin -- remove 2 kelps, remove 2 jellys
     } else if (c == "urchin") {
@@ -134,14 +154,23 @@ function addRules(c) {
         removeCreatures("kelp", 2);
         removeCreatures("jelly", 2);
 
+        rulesDisplayed.urchinAdded = true;
+
         // add 1 kelp -- add 1 jelly
     } else if (c == "kelp") {
 
         addCreatures("jelly", 1);
-        
+
+        rulesDisplayed.kelpAdded = true;
+
+        // add 1 jelly -- nothing
+    } else if (c == "jelly") {
+
+        rulesDisplayed.jellyAdded = true;
+
     }
 
-    // add 1 jelly -- nothing
+    
 
 }
 
@@ -154,21 +183,29 @@ function removeRules(c) {
         removeCreatures("kelp", 4);
         removeCreatures("jelly", 4);
 
+        rulesDisplayed.otterRemoved = true;
+
     // remove 1 urchin -- add 1 kelp, add 1 jelly
     } else if (c == "urchin") {
 
         addCreatures("kelp", 1);
         addCreatures("jelly", 1);
 
+        rulesDisplayed.urchinRemoved = true;
+
     // remove 1 kelp -- remove 1 jelly
     } else if (c == "kelp") {
 
         removeCreatures("jelly", 1);
+
+        rulesDisplayed.kelpRemoved = true;
+
+        // remove 1 jelly -- nothing
+    } else if (c == "jelly") {
+
+        rulesDisplayed.jellyRemoved = true;
         
     }
-
-    // remove 1 jelly -- nothing
-
 }
 
 function removeCreatures(type, num) {
@@ -224,9 +261,6 @@ function addCreatures(type, num) {
 
 }
 
-
-
-// add in an overall counter!!!!!!
 function countPop() {
 
     var o = 0;
@@ -264,6 +298,82 @@ function countPop() {
     }
 
     document.getElementById("pop").innerHTML = `Otters: ${o}&emsp;&emsp;Urchins: ${u}&emsp;&emsp;Kelp: ${k}&emsp;&emsp;Jellyfish:${j}`;
+
+}
+
+function showAddRules() {
+    
+    if (rulesDisplayed.animal == "otter") {
+
+        if (rulesDisplayed.otterAdded) {
+
+            document.getElementById("add-rule").innerHTML = "<h3>introduce one otter</h3> <img src='images/add_otter.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "urchin") {
+
+        if (rulesDisplayed.urchinAdded) {
+
+            document.getElementById("add-rule").innerHTML = "<h3>introduce one urchin</h3> <img src='images/add_urchin.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "kelp") {
+
+        if (rulesDisplayed.kelpAdded) {
+
+            document.getElementById("add-rule").innerHTML = "<h3>introduce one kelp</h3><img src='images/add_kelp.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "jelly") {
+
+        if (rulesDisplayed.jellyAdded) {
+
+            document.getElementById("add-rule").innerHTML = "<h3>introduce one jelly</h3><img src='images/add_jelly.png'>";
+
+        }
+
+    }
+}
+
+function showRemoveRules() {
+    
+    if (rulesDisplayed.animal == "otter") {
+
+        if (rulesDisplayed.otterRemoved) {
+
+            document.getElementById("remove-rule").innerHTML = "<h3>rehome one otter</h3> <img src='images/remove_otter.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "urchin") {
+
+        if (rulesDisplayed.urchinRemoved) {
+
+            document.getElementById("remove-rule").innerHTML = "<h3>rehome one urchin</h3> <img src='images/remove_urchin.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "kelp") {
+
+        if (rulesDisplayed.kelpRemoved) {
+
+            document.getElementById("remove-rule").innerHTML = "<h3>rehome one kelp</h3><img src='images/remove_kelp.png'>";
+
+        }
+
+    } else if (rulesDisplayed.animal == "jelly") {
+
+        if (rulesDisplayed.jellyRemoved) {
+
+            document.getElementById("remove-rule").innerHTML = "<h3>rehome one jelly</h3><img src='images/remove_jelly.png'>";
+
+        }
+
+    }
+
 
 }
 
